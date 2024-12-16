@@ -23,7 +23,7 @@ class Solution {
     }
     public boolean isBipartite(int[][] graph) {
         int V = graph.length;
-        int vis [] = new int[V];
+        int vis [] = new int[V+1];
         Arrays.fill(vis,-1);
         for(int i=0;i<graph.length;i++){
             if(vis[i]==-1){
