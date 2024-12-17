@@ -1,20 +1,19 @@
 class Solution {
-    public boolean bfs(int node, int vis[], int[][] graph) {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(node);
-        vis[node] = 0; 
-        
-        while (!q.isEmpty()) {
-            int parent = q.poll();
-            int parentColor = vis[parent];
-            int childColor = 1 - parentColor; 
-            
-            for (int child : graph[parent]) {
-                if (vis[child] == -1) {
-                    vis[child] = childColor;
-                    q.add(child);
-                } else if (vis[child] == parentColor) {
-                   
+    public boolean colFillBFS ( int parent, int initialCol,
+                              int col [], int[][] graph) {
+        col [parent] = 0;
+        Queue < Integer > buffer = new LinkedList < Integer > ();
+        buffer.add ( parent );
+        while ( buffer.size () != 0 ) {
+            int p = buffer.poll();
+            int parentCol = col [p];
+            int neighbourCol = 1 - col [p];
+            for ( Integer neigh : graph[p] ){
+                if (col [neigh] == -1 ) {
+                    col [neigh] = neighbourCol;
+                    buffer.offer (neigh);
+                }
+                else if ( col [neigh] == parentCol ) {
                     return false;
                 }
             }
@@ -23,11 +22,13 @@ class Solution {
     }
     public boolean isBipartite(int[][] graph) {
         int V = graph.length;
-        int vis [] = new int[V+1];
-        Arrays.fill(vis,-1);
-        for(int i=0;i<graph.length;i++){
-            if(vis[i]==-1){
-                if(bfs(i,vis,graph)==false)return false;
+        int col [] = new int [V];
+        Arrays.fill(col,-1);
+        for ( int i = 0; i < V ; i++) {
+            if ( col [i] == -1) {
+                if ( colFillBFS(i, 0, col, graph) == false) {
+                    return false;
+                }
             }
         }
         return true;
