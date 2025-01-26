@@ -16,7 +16,6 @@ class Solution {
                 start++;
                 windowSize = end-start+1;
             }
-            windowSize = end-start+1;
             ans=Math.max(ans,windowSize);    
             end++;
         }
