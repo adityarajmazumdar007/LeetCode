@@ -10,6 +10,7 @@ class Solution {
             maxFreq = Math.max(maxFreq, mp.get(s.charAt(j))); 
             while (j - i + 1 - maxFreq > k) {
                 mp.put(s.charAt(i), mp.get(s.charAt(i)) - 1);
+                maxFreq = Math.max(maxFreq, mp.get(s.charAt(i))); 
                 if(mp.get(s.charAt(i))==0){mp.remove(s.charAt(i));}
                 i++;
             }
