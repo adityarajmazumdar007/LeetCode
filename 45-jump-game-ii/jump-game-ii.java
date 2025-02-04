@@ -10,8 +10,8 @@ class Solution {
             if(i==lastJumpIdx){
                 lastJumpIdx=coverage;
                 totalJumps++;
-                if(lastJumpIdx>=destination)return totalJumps;
             }
+            if(lastJumpIdx>=destination)return totalJumps;
         }
         return 0;
     }
