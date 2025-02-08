@@ -10,7 +10,7 @@ class Solution {
                 if(nums[i]==0)count--;
                 i++;
             }
-            if(count<=k)len=Math.max(len,j-i+1);
+            len=Math.max(len,j-i+1);
             j++;
         }
         return len;
