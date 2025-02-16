@@ -3,7 +3,7 @@ class Solution {
         vis[node] = 1;
         for(Integer x : ls.get(node)) {
            if(vis[x] == 0) {
-            dfs(x,vis,ls);
+            dfs(x, vis, ls);
             }
             
         }
@@ -23,10 +23,10 @@ class Solution {
         int count = 0;
         int vis[] = new int[n+1];
         Arrays.fill(vis,0);
-        for(int i = 0;i < n; i++){
+        for(int i = 0; i < n; i++){
             if(vis[i] == 0){
                 count++;
-                dfs(i,vis,adjList);
+                dfs(i, vis, adjList);
             }
         }
         
