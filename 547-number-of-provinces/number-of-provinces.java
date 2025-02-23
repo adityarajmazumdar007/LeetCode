@@ -1,5 +1,4 @@
-class Solution { 
-    class DSU {
+class DSU {
     public int parents[];
     public int size[];
     DSU(int nodes) {
@@ -35,6 +34,7 @@ class Solution {
         }
     }
 }  
+class Solution { 
     public int findCircleNum(int[][] isConnected) {
         int n = isConnected.length;
         DSU dsu = new DSU(n);
