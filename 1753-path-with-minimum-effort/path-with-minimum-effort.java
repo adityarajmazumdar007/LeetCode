@@ -13,7 +13,6 @@ class Solution {
      PriorityQueue<Tuple> pq = 
         new PriorityQueue<Tuple>((x,y) -> x.distance - y.distance);
        
-    
         int n = heights.length; 
         int m = heights[0].length; 
 
@@ -43,7 +42,7 @@ class Solution {
                 int newr = row + dr[i]; 
                 int newc = col + dc[i];
 
-                if(newr>=0 && newc >=0 && newr < n && newc < m) {
+                if(newr >= 0 && newc >= 0 && newr < n && newc < m) {
 
                     int newEffort = 
                     Math.max(
