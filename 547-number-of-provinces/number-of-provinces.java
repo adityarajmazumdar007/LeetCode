@@ -1,34 +1,56 @@
-class Solution {
-    private static void  dfs(int node,int vis[],List<List<Integer>> ls){
-        vis[node] = 1;
-        for(Integer x : ls.get(node)) {
-           if(vis[x] == 0) {
-            dfs(x, vis, ls);
-            }
-            
+class Solution { 
+    class DSU {
+    public int parents[];
+    public int size[];
+    DSU(int nodes) {
+        parents = new int[nodes];
+        size = new int[nodes];
+        for(int i = 0; i <nodes; i++) {
+            parents[i] = i;
+            size[i] = 1;
         }
     }
-    
+
+    public int findUltimateParent(int u) {
+        if(u == parents[u]) {
+            return u;
+        }
+        parents[u] = findUltimateParent(parents[u]);
+        return parents[u];
+    }
+
+    public boolean unionBySize(int u, int v){
+        int ultParent_U = findUltimateParent(u);
+        int ultParent_V = findUltimateParent(v);
+        if(ultParent_U == ultParent_V)return false;
+        if(size[ultParent_U] < size[ultParent_V]) {
+            size[ultParent_V] += size[ultParent_U];
+            parents[ultParent_U] = ultParent_V;
+            return true;
+        }
+        else {
+            size[ultParent_U] += size[ultParent_V];
+            parents[ultParent_V] = ultParent_U;
+            return true;
+        }
+    }
+}  
     public int findCircleNum(int[][] isConnected) {
         int n = isConnected.length;
+        DSU dsu = new DSU(n);
         List<List<Integer>> adjList = new ArrayList<>();
         for (int i = 0; i < isConnected.length; i++){
-            adjList.add(new ArrayList<>());
             for(int j = 0; j < isConnected[0].length; j++){
                 if(isConnected[i][j] == 1 && i != j){
-                    adjList.get(i).add(j);
+                    dsu.unionBySize(i, j);
                 }
             }
         }
         int count = 0;
-        int vis[] = new int[n+1];
-        Arrays.fill(vis,0);
         for(int i = 0; i < n; i++){
-            if(vis[i] == 0){
-                count++;
-                dfs(i, vis, adjList);
-            }
+            if(dsu.parents[i] == i) count++;
         }
         
-    return count;}
+    return count;
+    }
 }
