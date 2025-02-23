@@ -44,9 +44,8 @@ class Solution {
             for(Pair iter: adj.get(node)) {
                 int adjNode = iter.first; 
                 int edW = iter.second; 
-                
 
-                if (cost + edW < dist[adjNode] && stops <= K) {
+                if (cost + edW < dist[adjNode]) {
                     dist[adjNode] = cost + edW; 
                     q.add(new Tuple(stops + 1, adjNode, cost + edW)); 
                 }
