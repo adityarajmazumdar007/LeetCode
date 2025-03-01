@@ -1,12 +1,12 @@
 class Solution {
    static int editDistanceUtil(String S1, String S2, int i, int j, int[][] dp) {
-        if (i < 0)
-            return j + 1;
-        if (j < 0)
-            return i + 1;
+        if (i == 0)
+            return j ;
+        if (j == 0)
+            return i ;
         if (dp[i][j] != -1)
             return dp[i][j];
-        if (S1.charAt(i) == S2.charAt(j))
+        if (S1.charAt(i-1) == S2.charAt(j-1))
             return dp[i][j] = editDistanceUtil(S1, S2, i - 1, j - 1, dp);
         else
             return dp[i][j] = 1 + Math.min(editDistanceUtil(S1, S2, i - 1, j - 1, dp),
@@ -16,10 +16,10 @@ class Solution {
         int n = S1.length();
         int m = S2.length();
 
-        int[][] dp = new int[n][m];
+        int[][] dp = new int[n+1][m+1];
         for (int row[] : dp)
             Arrays.fill(row, -1);
 
-        return editDistanceUtil(S1, S2, n - 1, m - 1, dp);
+        return editDistanceUtil(S1, S2, n , m , dp);
     }
 }
