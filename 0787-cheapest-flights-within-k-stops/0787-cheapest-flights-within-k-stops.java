@@ -31,11 +31,15 @@ class Solution {
         }
 
         Queue<Tuple> q = new LinkedList<>(); 
+        
         q.add(new Tuple(0, src, 0));
+
         int[] dist = new int[n]; 
+
         for(int i = 0;i<n;i++) {
             dist[i] = (int)(1e9); 
         }
+
         dist[src] = 0; 
 
         while(!q.isEmpty()) {
@@ -47,6 +51,7 @@ class Solution {
             int cost = it.third; 
             
             if(stops > K) break; 
+            
             for(Pair iter: adj.get(node)) {
                 int adjNode = iter.first; 
                 int edW = iter.second; 
