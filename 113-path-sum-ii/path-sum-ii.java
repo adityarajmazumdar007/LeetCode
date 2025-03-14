@@ -13,7 +13,6 @@ class Solution {
         check(root.left,sum,target+root.val,ans,temp);
         check(root.right,sum,target+root.val,ans,temp);
         temp.remove(temp.size()-1);
-        return ;
     }
 
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
