@@ -8,8 +8,6 @@ class Solution {
                 ans.add(new ArrayList<>(temp));
                 temp.remove(temp.size()-1);
             }
-            target-=root.val;
-            return;
         }
         temp.add(root.val);
         check(root.left,sum,target+root.val,ans,temp);
