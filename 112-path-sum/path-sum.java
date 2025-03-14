@@ -6,9 +6,8 @@ class Solution {
             if(currSum==targetSum)return true;
             return false;
         }
-        currSum+=root.val;
-        if(helper(root.left,targetSum,currSum)==true ||helper(root.right,targetSum,currSum)==true )return true;
-        currSum-=root.val;
+        if(helper(root.left,targetSum,currSum+root.val) ==true) return true;
+        if(helper(root.right,targetSum,currSum+root.val)==true) return true;
         return false;
     }
     public boolean hasPathSum(TreeNode root, int targetSum) {
