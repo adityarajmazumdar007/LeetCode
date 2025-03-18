@@ -15,22 +15,20 @@ class Solution {
         }
         ListNode slow = head;
         ListNode fast = head;
+
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
         ListNode newHead = reverseLinkedList(slow.next);
         ListNode first = head;
-        ListNode second = newHead;
-        while (second != null) {
-            if (first.val != second.val) {
-                //reverseLinkedList(newHead);
+        while (newHead != null) {
+            if (first.val != newHead.val) {
                 return false;
             }
             first = first.next;
-            second = second.next;
+            newHead = newHead.next;
         }
-        //reverseLinkedList(newHead);
         return true; 
     }
 }
