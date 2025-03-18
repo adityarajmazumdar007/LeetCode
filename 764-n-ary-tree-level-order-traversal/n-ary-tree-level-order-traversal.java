@@ -31,11 +31,8 @@ class Solution {
             for (int i = 0; i < size; i++) {
                 Node curr = q.poll();
                 l2.add(curr.val); 
-
-                if (curr.children != null) {
                     for (Node child : curr.children) {
                         q.offer(child);
-                    }
                 }
             }
             l1.add(l2); 
