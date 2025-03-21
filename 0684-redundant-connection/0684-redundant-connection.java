@@ -1,13 +1,12 @@
 class Solution {
     int totalNodes;
-    // 1 based 1,2,3
     public int[] findRedundantConnection(int[][] edges) {
         totalNodes = edges.length;
         int res[] = new int[2]; 
         DisjointSet dsu = new DisjointSet(totalNodes);
         for (int[] edge: edges) {
             if (!dsu.unionBySize(edge[0]-1, edge[1]-1)) {
-                return edge;
+                res = edge;
             }
         }
         return res;
@@ -34,13 +33,11 @@ public class DisjointSet {
         return parent[node];
     }
     public boolean unionBySize(int node1, int node2){
-        //1. find the root parent
         int rootParent1 = findRootParent(node1);
         int rootParent2 = findRootParent(node2);
         if(rootParent1==rootParent2){
             return false;
         }
-        // 2, union of components
         if(size[rootParent1]<size[rootParent2]){
             parent[rootParent1] = rootParent2;
             size[rootParent2] += size[rootParent1];
@@ -51,6 +48,5 @@ public class DisjointSet {
         return true;
     }
 }
-
 
 
