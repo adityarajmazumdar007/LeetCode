@@ -1,7 +1,7 @@
 class Solution {
     public int solve(int row, int col, int[][] matrix, int[][] dp) {
         int n = matrix.length;
-        if (row < 0 || col < 0 || row >= n || col >= n) return Integer.MAX_VALUE;
+        if (row < 0 || col < 0 || col >= n) return Integer.MAX_VALUE;
         if (row == 0) return matrix[0][col];
         if (dp[row][col] != (int)1e9) return dp[row][col];
         int leftUp = solve(row - 1, col - 1, matrix, dp);
