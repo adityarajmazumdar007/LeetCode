@@ -18,20 +18,19 @@ class DSU {
         return parents[u];
     }
 
-    public boolean unionBySize(int u, int v){
+    public void unionBySize(int u, int v){
         int ultParent_U = findUltimateParent(u);
         int ultParent_V = findUltimateParent(v);
-        if(ultParent_U == ultParent_V)return false;
+        if(ultParent_U == ultParent_V)return;
         if(size[ultParent_U] < size[ultParent_V]) {
             size[ultParent_V] += size[ultParent_U];
             parents[ultParent_U] = ultParent_V;
-            return true;
         }
         else {
             size[ultParent_U] += size[ultParent_V];
             parents[ultParent_V] = ultParent_U;
-            return true;
         }
+        return;
     }
 }  
 class Solution { 
