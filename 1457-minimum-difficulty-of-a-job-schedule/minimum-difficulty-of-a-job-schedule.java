@@ -16,8 +16,6 @@ public class Solution {
     }
 
     private int solve(int[] jobDifficulty, int n, int idx, int d) {
-        // If you have only 1 day, then you will do all the remaining jobs
-        // and select the max difficulty as the answer
         if (d == 1) {
             return Arrays.stream(Arrays.copyOfRange(jobDifficulty, idx, n)).max().orElse(Integer.MIN_VALUE);
         }
