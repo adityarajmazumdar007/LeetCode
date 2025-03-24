@@ -30,12 +30,13 @@ class Solution {
             int c=q.peek().col;
             int dis=q.peek().dist;
             q.poll();
-            dist[r][c] =dis;
+            //dist[r][c] =dis;
             for(int i=0;i<4;i++){
             int nrow= r+delR[i];
             int ncol = c + delC[i];
             if(nrow >=0 && nrow< n && ncol>=0 && ncol<m && vis[nrow][ncol]==0 && mat[nrow][ncol]==1){
                 vis[nrow][ncol]=1;
+                dist[nrow][ncol] =dis+1;
                 q.offer(new Pair(nrow,ncol,dis+1));
             }
             }
