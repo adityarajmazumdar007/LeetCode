@@ -11,14 +11,8 @@ class Solution {
         int n= maze.length;
         int m= maze[0].length;
        if(maze[entrance[0]][entrance[1]]=='+')return -1;
-        int[][] dist = new int[n][m]; 
-        for(int i = 0;i<n;i++) {
-            for(int j =0;j<m;j++) {
-                dist[i][j] = 0;
-            }
-        }
-        
-         Queue<tuple> q = new LinkedList<>();  
+        int[][] dist = new int[n][m];
+        Queue<tuple> q = new LinkedList<>();  
         dist[entrance[0]][entrance[1]] = 1; 
         q.add(new tuple(0, entrance[0], entrance[1])); 
         int dr[] = {-1, 0, 1, 0}; 
