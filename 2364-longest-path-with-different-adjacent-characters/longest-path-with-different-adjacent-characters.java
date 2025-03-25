@@ -25,12 +25,13 @@ class Solution {
             }
         }
 
-        int includeCurrentNode = longest + 1; // Include current node
+        int includeCurrentNode = Math.max(longest, secondLongest) + 1; // Include current node
+        int onlyRootValid = 1; // If all children have duplicate characters
         int fullPath = longest + secondLongest + 1; // Longest valid path in the subtree
 
-        result = Math.max(result, fullPath);
+        result = Math.max(result, Math.max(fullPath, Math.max(includeCurrentNode, onlyRootValid)));
 
-        return includeCurrentNode;
+        return Math.max(includeCurrentNode, onlyRootValid);
     }
 
     public int longestPath(int[] parent, String s) {
