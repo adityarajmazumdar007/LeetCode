@@ -40,11 +40,11 @@ class Solution {
     }
 
     private int upperBound(int[] arr, int key) {
-        int low = 0, high = arr.length;
-        while (low < high) {
+        int low = 0, high = arr.length - 1;
+        while (low <= high) {
             int mid = low + (high - low) / 2;
             if (arr[mid] > key)
-                high = mid;
+                high = mid - 1;
             else
                 low = mid + 1;
         }
