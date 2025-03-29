@@ -30,11 +30,11 @@ class Solution {
 
     // Binary Search to find the first index >= target
     private int lowerBound(int[] days, int target, int start, int n) {
-        int left = start, right = n;
-        while (left < right) {
+        int left = start, right = n - 1;
+        while (left <= right) {
             int mid = left + (right - left) / 2;
             if (days[mid] >= target) {
-                right = mid; // Move left to find the lower bound
+                right = mid - 1; // Move left to find the lower bound
             } else {
                 left = mid + 1; // Move right
             }
