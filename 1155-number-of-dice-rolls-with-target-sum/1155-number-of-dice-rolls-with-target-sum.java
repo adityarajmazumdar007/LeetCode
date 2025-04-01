@@ -1,25 +1,27 @@
 public class Solution {
     private final long M = 1000000007;
+    private int[][] t = new int[32][1002];
 
-    public int numRollsToTarget(int n, int k, int target) {
-        int[][] t = new int[n + 1][target + 1];
+    public int solve(int n, int k, int target) {
+        if (target < 0 || n == 0)
+            return target == 0 ? 1 : 0;
 
-        // t[i][j] = total ways to obtain j from exactly i dices
+        if (t[n][target] != -1)
+            return t[n][target];
 
-        t[0][0] = 1;
-        
-        for (int i = 1; i <= n; i++) { 
-            for (int j = 1; j <= target; j++) { 
+        int sum = 0;
 
-                for (int f = 1; f <= k; f++) {
-                    if (f <= j) {
-                        t[i][j] = (int) ((t[i][j] + t[i - 1][j - f]) % M);
-                    }
-                }
-            }
+        for (int i = 1; i <= k; i++) {
+            sum = (sum + solve(n - 1, k, target - i)) % (int) M;
         }
 
-        return t[n][target];
+        return t[n][target] = sum;
+    }
 
+    public int numRollsToTarget(int n, int k, int target) {
+        for (int i = 0; i < 32; i++) {
+            Arrays.fill(t[i], -1);
+        }
+        return solve(n, k, target);
     }
 }
