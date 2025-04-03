@@ -11,7 +11,7 @@ class Solution {
                 if(mp.get(fruits[i])==0)mp.remove(fruits[i]);
                 i++;
             }
-            if(mp.size()<=2)maxi=Math.max(maxi,j-i+1);
+            maxi=Math.max(maxi,j-i+1);
             j++;
         }
         return maxi;
