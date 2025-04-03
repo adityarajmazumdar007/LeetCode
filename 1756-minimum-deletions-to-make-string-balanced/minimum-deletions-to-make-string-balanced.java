@@ -1,26 +1,26 @@
 class Solution {
     public int minimumDeletions(String s) {
         int n = s.length();
-        int[] suffixA = new int[n + 1]; // Stores count of 'a's to the right of index i
-        int[] prefixB = new int[n + 1]; // Stores count of 'b's to the left of index i
+        int countA = 0;  // Total count of 'a' in the string
+        int countB = 0;  // Number of 'b's encountered so far
+        int minDeletions = Integer.MAX_VALUE;
 
-        // Compute suffixA
-        for (int i = n - 1; i >= 0; i--) {
-            suffixA[i] = suffixA[i + 1] + (s.charAt(i) == 'a' ? 1 : 0);
+        // First pass: Count total number of 'a'
+        for (char c : s.toCharArray()) {
+            if (c == 'a') countA++;
         }
 
-        // Compute prefixB
-        for (int i = 1; i <=n; i++) {
-            prefixB[i] = prefixB[i - 1] + (s.charAt(i - 1) == 'b' ? 1 : 0);
+        // Second pass: Calculate min deletions dynamically
+        for (char c : s.toCharArray()) {
+            minDeletions = Math.min(minDeletions, countB + countA);
+
+            // Update counters based on current character
+            if (c == 'b') countB++; // More 'b's before
+            else countA--;          // Fewer 'a's remaining
         }
 
-        int result = Integer.MAX_VALUE;
-        
-        // Compute the minimum deletions
-        for (int i = 0; i <= n; i++) {
-            result = Math.min(result, prefixB[i] + suffixA[i]);
-        }
-        
-        return result;
+        // Edge case: If the entire string is already valid
+        return Math.min(minDeletions, countB);
     }
 }
+
