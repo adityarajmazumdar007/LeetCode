@@ -10,9 +10,9 @@ class Solution {
                 if(nums[i] == 0) count--;
                 i++;
             }
-            longest = Math.max(longest, j - i);
+            longest = Math.max(longest, j - i + 1);
             j++;
         }
-        return longest;
+        return longest - 1;
     }
 }
