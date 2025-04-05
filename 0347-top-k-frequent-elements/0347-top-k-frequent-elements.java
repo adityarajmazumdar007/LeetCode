@@ -1,5 +1,3 @@
-
-
 class Pair {
     int count;
     int element;
