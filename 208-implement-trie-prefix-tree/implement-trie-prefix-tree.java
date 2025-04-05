@@ -2,10 +2,14 @@ class Trie {
     static class TrieNode {
         TrieNode[] children;
         boolean isEndOfWord;
+        int countOfPrefix;
+        int countOfWords;
 
         TrieNode() {
             isEndOfWord = false;
-           children = new TrieNode[26];
+            children = new TrieNode[26];
+            countOfPrefix = 0;
+            countOfWords = 0;
         }
     }
 
@@ -25,8 +29,10 @@ class Trie {
                 crawler.children[index] = new TrieNode();
             }
             crawler = crawler.children[index];
+            crawler.countOfPrefix++;
         }
         crawler.isEndOfWord = true;
+        crawler.countOfWords++;
     }
 
     /** Returns if the word is in the trie. */
