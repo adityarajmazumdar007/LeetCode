@@ -1,19 +1,21 @@
 class Solution {
     public int countDays(int days, int[][] meetings) {
-        Arrays.sort(meetings, (a, b) -> a[0] - b[0]);
-        int count = meetings[0][0] - 1;
-        int n = meetings.length;
-        for (int i = 1; i < n; i++) {
-            if (meetings[i][0] <= meetings[i - 1][1]) {
-                if (meetings[i][1] < meetings[i - 1][1]) {
-                    meetings[i][1] = meetings[i - 1][1];
-                }
-            } else {
-                int dy = meetings[i][0] - meetings[i - 1][1];
-                count += dy - 1;
+        Arrays.sort(meetings, (a, b) -> Integer.compare(a[0], b[0]));
+        
+        int result = 0;
+        int end = 0;
+        
+        for (int[] meet : meetings) {
+            if (meet[0] > end) {
+                result += meet[0] - end - 1;
             }
+            end = Math.max(end, meet[1]);
         }
-        count += days - meetings[n - 1][1];
-        return count;
+        
+        if (days > end) {
+            result += days - end;
+        }
+        
+        return result;
     }
 }
