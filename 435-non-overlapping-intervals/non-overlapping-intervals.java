@@ -10,7 +10,6 @@ class Solution {
                 endTime = intervals[i][1];
             }
         }
-
         return intervals.length- count;
     }
 }
