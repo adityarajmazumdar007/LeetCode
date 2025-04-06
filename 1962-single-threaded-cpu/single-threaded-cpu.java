@@ -1,53 +1,52 @@
-// TC = O(nlogn)
-// SC = O(n)
 
 class Solution {
+    static class Task {
+        int startTime;
+        int processingTime;
+        int index;
+
+        Task(int s, int p, int i) {
+            this.startTime = s;
+            this.processingTime = p;
+            this.index = i;
+        }
+    }
+
     public int[] getOrder(int[][] tasks) {
         int n = tasks.length;
-        Task [] arr = new Task[n];
-        for(int i = 0 ;i<n;i++){
-            arr[i] = new Task(i, tasks[i][0],tasks[i][1]);
+        List<Task> taskList = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            taskList.add(new Task(tasks[i][0], tasks[i][1], i));
         }
 
-        Arrays.sort(arr, (a,b)->{
-            return Integer.compare(a.enqueueTime,b.enqueueTime);
-        });
+        // Sort by enqueue time
+        taskList.sort(Comparator.comparingInt(t -> t.startTime));
 
-        PriorityQueue<Task> p = new PriorityQueue<>((a,b)->{
-            if(a.processingTime == b.processingTime){
-                return Integer.compare(a.idx,b.idx);
-            }
-            return Integer.compare(a.processingTime,b.processingTime);
-        });
-        
-        int[] ans = new int[n];
-        int ansIdx = 0;
-        int taskIdx = 0;
-        int curTime= 0;
+        PriorityQueue<Task> pq = new PriorityQueue<>(
+            (a, b) -> a.processingTime == b.processingTime ? a.index - b.index : a.processingTime - b.processingTime
+        );
 
-        while(ansIdx < n){
-            while(taskIdx < n && arr[taskIdx].enqueueTime <= curTime){
-                p.offer(arr[taskIdx++]);
+        int[] result = new int[n];
+        int idx = 0, resIdx = 0;
+        long currTime = 0;
+
+        while (idx < n || !pq.isEmpty()) {
+            // If no tasks are available, jump time to the next available task
+            if (pq.isEmpty() && currTime < taskList.get(idx).startTime) {
+                currTime = taskList.get(idx).startTime;
             }
-            if(p.isEmpty()){
-                curTime = arr[taskIdx].enqueueTime;
-            }else{
-                curTime += p.peek().processingTime;
-                ans[ansIdx++] = p.poll().idx;
+
+            while (idx < n && taskList.get(idx).startTime <= currTime) {
+                pq.offer(taskList.get(idx));
+                idx++;
             }
+
+            Task currTask = pq.poll();
+            currTime += currTask.processingTime;
+            result[resIdx++] = currTask.index;
         }
-        return ans;       
-    }
-    
-    class Task {
-        int idx;
-        int enqueueTime;
-        int processingTime;
 
-        Task(int idx , int en , int pro){
-            this.idx = idx;
-            this.enqueueTime = en;
-            this.processingTime = pro;
-        }
+        return result;
     }
 }
