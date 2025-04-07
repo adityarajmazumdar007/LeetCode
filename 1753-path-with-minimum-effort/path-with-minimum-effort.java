@@ -8,6 +8,7 @@ class Tuple{
         this.col = col; 
     }
 }
+///// this is just dijikstra only, just fqacny words
 class Solution {
     public int minimumEffortPath(int[][] heights) {
      PriorityQueue<Tuple> pq = 
