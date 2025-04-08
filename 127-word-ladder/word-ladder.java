@@ -3,7 +3,7 @@ class Solution {
          List < String > adj = new ArrayList <> ();
         for (int i = 0; i < node.length(); i++) {
             for ( char ch = 'a' ; ch <='z' ; ch++) {
-                if ( ch == node.charAt(i)) continue;
+                //if ( ch == node.charAt(i)) continue;
                 String newWord = node.substring(0,i) + ch + node.substring(i+1,node.length());
                 if (visited.contains(newWord) ) adj.add(newWord);
             }
