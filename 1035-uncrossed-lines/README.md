@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/uncrossed-lines/">1035. Uncrossed Lines</a></h2><h3>Medium</h3><hr><p>You are given two integer arrays <code>nums1</code> and <code>nums2</code>. We write the integers of <code>nums1</code> and <code>nums2</code> (in the order they are given) on two separate horizontal lines.</p>
+<h2><a href="https://leetcode.com/problems/uncrossed-lines">1035. Uncrossed Lines</a></h2><h3>Medium</h3><hr><p>You are given two integer arrays <code>nums1</code> and <code>nums2</code>. We write the integers of <code>nums1</code> and <code>nums2</code> (in the order they are given) on two separate horizontal lines.</p>
 
 <p>We may draw connecting lines: a straight line connecting two numbers <code>nums1[i]</code> and <code>nums2[j]</code> such that:</p>
 
