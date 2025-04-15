@@ -21,10 +21,8 @@ class Solution {
         return dfs(id);
     }
 
-    // 2. Define DFS Function
     private int dfs(int currentId) {
-        // Handle case where subordinate ID might not be in the map
-        // (though problem constraints usually guarantee valid IDs)
+
         Employee currentEmployee = employeeMap.get(currentId);
         if (currentEmployee == null) {
             return 0;
