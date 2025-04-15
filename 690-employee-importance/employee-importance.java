@@ -1,14 +1,7 @@
 class Solution {
-    private Map<Integer, Employee> employeeMap; // To store map for quick lookup
-
-    /**
-     * Calculates the total importance value of an employee and all their subordinates.
-     * @param employees List of all employees.
-     * @param id ID of the starting employee.
-     * @return Total importance value.
-     */
+    private Map<Integer, Employee> employeeMap; 
     public int getImportance(List<Employee> employees, int id) {
-        // 1. Initialize & Preprocess
+
         if (employees == null || employees.isEmpty()) {
             return 0;
         }
