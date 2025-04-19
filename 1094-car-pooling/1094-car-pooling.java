@@ -3,7 +3,7 @@ class Solution {
         int pc[] = new int[1001];
         for(int i = 0 ; i < trips.length; i++) {
             pc[trips[i][1]] += trips[i][0];
-            pc[trips[i][2] + 1] -= trips[i][0];
+            pc[trips[i][2]] -= trips[i][0];
         }
 
         int j = 0;
