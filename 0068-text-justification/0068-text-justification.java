@@ -21,7 +21,6 @@ class Solution {
             
             int remainingSlots = maxWidth - lettersCount;
             
-            
             int eachWordSpace = spaceSlots == 0 ? 0 : remainingSlots / spaceSlots;
             int extraSpace    = spaceSlots == 0 ? 0 : remainingSlots % spaceSlots;
             
