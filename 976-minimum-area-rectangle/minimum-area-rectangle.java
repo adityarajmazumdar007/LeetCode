@@ -7,7 +7,7 @@ class Solution {
         
         @Override
         public boolean equals(Object obj)
-        { //System.out.println("inside");
+        { 
             return (((Node) obj).x == this.x)&&(((Node) obj).y == this.y);
         }
         
@@ -34,7 +34,6 @@ class Solution {
                 Node pt4 = new Node(x2,y1);
                 if(ptset.contains(pt3) && ptset.contains(pt4))
                 {   int area= Math.abs(x1-x2)*Math.abs(y1-y2);
-                    //System.out.println("Inside "+ x1 +" "+y1+" "+x2+" "+y2+" "+area);
                     
                     if(min>area && area!=0)
                         min=area;
