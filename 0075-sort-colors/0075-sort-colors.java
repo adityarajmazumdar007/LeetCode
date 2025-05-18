@@ -7,18 +7,14 @@ class Solution {
             int num=arr[mid];
             if(num==0){
                 int temp=arr[low];
-                arr[low]=arr[mid];
-                arr[mid]=temp;
-                mid++;
-                low++;
+                arr[low++]=arr[mid];
+                arr[mid++]=temp;
             }
             else if(num==1){mid++;}
             else{
-                int temp=arr[high];
-                
-                arr[high]=arr[mid];
+                int temp=arr[high]; 
+                arr[high--]=arr[mid];
                 arr[mid]=temp;
-                high--;
             }
         }
         return;
