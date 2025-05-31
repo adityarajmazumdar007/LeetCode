@@ -1,5 +1,6 @@
 class Solution {
     public int countTime(String time) {
+       
         if (time.equals("??:??"))
             return 24 * 60;
 
