@@ -1,56 +1,43 @@
+import java.util.*;
 
-
-class Solution {
+public class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
-        ArrayList<ArrayList<ArrayList<Integer>>> adjList = new ArrayList<>();
-        for (int i = 0; i <= n; i++) {
-            adjList.add(new ArrayList<>());
+        // Step 1: Build adjacency list
+        Map<Integer, List<int[]>> graph = new HashMap<>();
+        for (int[] edge : times) {
+            graph.computeIfAbsent(edge[0], x -> new ArrayList<>())
+                 .add(new int[]{edge[1], edge[2]});
         }
-        for (int i = 0; i < times.length; i++) {
-        int source = times[i][0];
-        int destination = times[i][1];
-        int weight = times[i][2];
-        adjList.get(source).add(new ArrayList<>(Arrays.asList(destination, weight)));
-    }
+
+        // Step 2: Initialize distances to MAX
         int[] dist = new int[n + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.distance - b.distance);
-        pq.add(new Pair(k, 0));
         dist[k] = 0;
 
-        while (!pq.isEmpty()) {
-            Pair current = pq.poll();
-            int node = current.node;
-            int distance = current.distance;
+        // Step 3: Min-heap for (currentTime, node)
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        pq.offer(new int[]{0, k});
 
-            for (int i = 0; i < adjList.get(node).size(); i++ ) {
-                int neighbor = adjList.get(node).get(i).get(0);
-                int weight = adjList.get(node).get(i).get(1);
-                int newDistance = distance + weight;
-                if (newDistance < dist[neighbor]) {
-                    dist[neighbor] = newDistance;
-                    pq.offer(new Pair(neighbor, newDistance));
+        // Step 4: Standard Dijkstra
+        while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            int time = curr[0], node = curr[1];
+            if (!graph.containsKey(node)) continue; // No outgoing edges
+            for (int[] neighbor : graph.get(node)) {
+                int next = neighbor[0], weight = neighbor[1];
+                if (time + weight < dist[next]) {
+                    dist[next] = time + weight;
+                    pq.offer(new int[]{dist[next], next});
                 }
             }
         }
 
-        int maxDelay = 0;
+        // Step 5: Find max time among all nodes
+        int res = 0;
         for (int i = 1; i <= n; i++) {
-            if (dist[i] == Integer.MAX_VALUE) {
-                return -1;
-            }
-            maxDelay = Math.max(maxDelay, dist[i]);
+            if (dist[i] == Integer.MAX_VALUE) return -1; // Unreachable node
+            res = Math.max(res, dist[i]);
         }
-        return maxDelay;
-    }
-
-    class Pair {
-        int node;
-        int distance;
-
-        public Pair(int node, int distance) {
-            this.node = node;
-            this.distance = distance;
-        }
+        return res;
     }
 }
