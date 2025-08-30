@@ -27,7 +27,7 @@ class Solution {
     }                                                             // CHANGED
 
     private boolean canPartition(int[] nums, boolean[] visited, int start, int k, int curSum, int subsetSum) {
-        if (k == 1) return true;                                  // CHANGED: last bucket must succeed
+        if (k == 0) return true;                                  // CHANGED: last bucket must succeed
         if (curSum == subsetSum) {                                // (your logic) start next bucket
             return canPartition(nums, visited, 0, k - 1, 0, subsetSum);
         }
@@ -43,7 +43,7 @@ class Solution {
             // CHANGED: symmetry prunes — if we failed when the bucket was empty,
             // or we failed when we tried to close the bucket exactly,
             // no point trying more at this depth.
-           // if (curSum == 0 || curSum + nums[i] == subsetSum) return false; // CHANGED
+            if (curSum == 0 || curSum + nums[i] == subsetSum) return false; // CHANGED
         }
         return false;
     }
