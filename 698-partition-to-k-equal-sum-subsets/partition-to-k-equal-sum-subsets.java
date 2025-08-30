@@ -32,22 +32,18 @@ class Solution {
             return canPartition(nums, visited, 0, k - 1, 0, subsetSum);
         }
 
-       // int prevTried = -1;                                       // CHANGED: duplicate-skip at this depth
         for (int i = start; i < nums.length; i++) {
             if (visited[i]) continue;
-           // if (nums[i] == prevTried) continue;                   // CHANGED: same value already failed here
             if (curSum + nums[i] > subsetSum) continue;           // CHANGED: pruning — don’t overshoot
 
             visited[i] = true;
             if (canPartition(nums, visited, i + 1, k, curSum + nums[i], subsetSum)) return true;
             visited[i] = false;
 
-          //  prevTried = nums[i];                                  // CHANGED: remember failed candidate
-
             // CHANGED: symmetry prunes — if we failed when the bucket was empty,
             // or we failed when we tried to close the bucket exactly,
             // no point trying more at this depth.
-            if (curSum == 0 || curSum + nums[i] == subsetSum) return false; // CHANGED
+           // if (curSum == 0 || curSum + nums[i] == subsetSum) return false; // CHANGED
         }
         return false;
     }
