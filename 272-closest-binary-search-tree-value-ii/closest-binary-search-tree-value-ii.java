@@ -20,30 +20,31 @@ class Solution {
         return new ArrayList<>(q);
     }
 
-    // Inorder DFS with early stop; returns true if we can prune remaining recursion.  // CHANGED
-    private boolean inorder(TreeNode node, double target, int k, Deque<Integer> q) {  // CHANGED
-        if (node == null) return false;
+    // Inorder DFS with early stop; returns true if we can prune remaining recursion.  
+    private void inorder(TreeNode node, double target, int k, Deque<Integer> q) {  
+        if (node == null) return ;
 
         // Left
-        if (inorder(node.left, target, k, q)) return true;                            // CHANGED
+        inorder(node.left, target, k, q);                            
 
         // Visit current node
         int v = node.val;
         if (q.size() < k) {
-            q.addLast(v);                                                             // CHANGED
+            q.addLast(v);                                                            
         } else {
-            int far = q.peekFirst();  // current farthest among window (leftmost)     // CHANGED
+            int far = q.peekFirst();  // current farthest among window (leftmost)    
             if (Math.abs(v - target) < Math.abs(far - target)) {
-                q.pollFirst();                                                        // CHANGED
-                q.addLast(v);                                                         // CHANGED
+                q.pollFirst();                                                        
+                q.addLast(v);                                                         
             } else if (v > target) {
-                // As values increase, distance will only grow ⇒ prune               // CHANGED
-                return true;                                                          // CHANGED
+                // As values increase, distance will only grow ⇒ prune               
+                return ;                                                          
             }
             // else: v <= target and not better than 'far' → keep scanning right
         }
 
         // Right
-        return inorder(node.right, target, k, q);                                     // CHANGED
+     inorder(node.right, target, k, q);       
+     return;                              
     }
 }
