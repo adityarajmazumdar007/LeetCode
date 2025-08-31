@@ -14,12 +14,7 @@ class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
         if (root == null) return null;
 
-        // --- Case A: Leaf node (explicit early handling) ---
-        // As requested: if current node is a leaf, we can directly return root when it's not the target.
-        // If it IS the target leaf, delete by returning null (correct BST deletion).
-        if (root.left == null && root.right == null) {          // CHANGED: explicit leaf case
-            return (root.val == key) ? null : root;             // CHANGED
-        }
+       
 
         // Normal BST search to reach the node to delete
         if (root.val < key) {
@@ -28,9 +23,12 @@ class Solution {
             root.left = deleteNode(root.left, key);
         } else {
             // --- Found the node with value == key ---
-
-            // --- Case B: One child (left is null) ---
-            if (root.left == null) return root.right;
+            // child node case A
+            if (root.left == null && root.right == null) {          
+            return null;
+        }
+            // --- Case b: One child (left is null) ---
+            else if (root.left == null) return root.right;
 
             // --- Case B: One child (right is null) ---
             else if (root.right == null) return root.left;
