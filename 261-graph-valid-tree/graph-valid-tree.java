@@ -24,7 +24,7 @@ class Solution {
             int ra = find(a), rb = find(b);
             if (ra == rb) return false; // cycle
             // Union by size
-           // if (size[ra] < size[rb]) //{ int t = ra; ra = rb; rb = t; }
+            if (size[ra] < size[rb]) { int t = ra; ra = rb; rb = t; }
             parent[rb] = ra;
             size[ra] += size[rb];
             components--;
