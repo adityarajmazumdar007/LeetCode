@@ -1,43 +1,42 @@
-class Solution {
-    public List<String> findAdj(String node, Set<String> wordSet) {
-        List<String> adj = new ArrayList<>();
-        for (int i = 0; i < node.length(); i++) {
-            for (char ch = 'a'; ch <= 'z'; ch++) {
-                if (ch == node.charAt(i)) continue;
-                String newWord = node.substring(0, i) + ch + node.substring(i + 1);
-                if (wordSet.contains(newWord)) adj.add(newWord);
-            }
-        }
-        return adj;
-    }
+import java.util.*;
 
+public class Solution {
+    // Returns the length of shortest transformation sequence
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Set<String> wordSet = new HashSet<>(wordList);
-        if (!wordSet.contains(endWord)) return 0;
+        // Edge case: Empty or invalid input
+        if (beginWord == null || endWord == null || wordList == null || wordList.size() == 0)
+            return 0;
 
-        Queue<String> q = new LinkedList<>();
+        Set<String> wordSet = new HashSet<>(wordList); // O(1) lookup
+        if (!wordSet.contains(endWord)) return 0; // End word must be present
+
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);
         Set<String> visited = new HashSet<>();
-
-        q.offer(beginWord);
         visited.add(beginWord);
-        int level = 1;
+        int level = 1; // Start at 1 (beginWord)
 
-        while (!q.isEmpty()) {
-            int size = q.size();
+        while (!queue.isEmpty()) {
+            int size = queue.size(); // Level by level
             for (int i = 0; i < size; i++) {
-                String node = q.poll();
-                if (node.equals(endWord)) return level;
-
-                for (String neighbor : findAdj(node, wordSet)) {
-                    if (!visited.contains(neighbor)) {
-                        visited.add(neighbor);
-                        q.offer(neighbor);
+                String word = queue.poll();
+                // Try changing each character
+                for (int j = 0; j < word.length(); j++) {
+                    char[] arr = word.toCharArray();
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        if (arr[j] == c) continue; // Skip same character
+                        arr[j] = c;
+                        String nextWord = new String(arr);
+                        if (nextWord.equals(endWord)) return level + 1; // Found answer
+                        if (wordSet.contains(nextWord) && !visited.contains(nextWord)) {
+                            queue.offer(nextWord);
+                            visited.add(nextWord); // Mark as visited
+                        }
                     }
                 }
             }
             level++;
         }
-
-        return 0;
+        return 0; // No path found
     }
 }
