@@ -1,3 +1,8 @@
+// for each point, get the msximum and second maximum conflicting start value
+// valid subarray = point - maxPoint
+// additional subarray = maxPoint - secondMaxPoint
+// mantain list of all additional valid subarray after removing one conflicting pair
+// ex [ 1, 1, 1, 1, 1]
 class Solution {
     public long maxSubarrays(int n, int[][] conflictingPairs) {
         long valid = 0;
