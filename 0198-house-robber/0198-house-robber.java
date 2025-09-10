@@ -4,11 +4,10 @@ class Solution {
         int dp [] = new int[n];
         Arrays.fill(dp,-1);
         dp[0]=nums[0];
-        if(nums.length == 1) return dp[0];
-        dp[1] = Math.max(dp[0], nums[1]);
-        for(int i=2;i<n;i++){
+        for(int i=1;i<n;i++){
             int notPick=dp[i-1];
-            int pick=nums[i] + dp[i-2];
+            int pick=nums[i];
+            if (i>1){pick+=dp[i-2];}
             dp[i]=Math.max(pick,notPick);
         }
         return dp[n-1];
