@@ -1,0 +1,23 @@
+// 2 ms. 99.20%
+class Solution {
+    int n;
+    private boolean dfs(int[][] grid, int i, int j, int T, boolean[][] visited) {
+        if(i < 0 || i >= n || j < 0 || j >= n || visited[i][j] || grid[i][j] > T) return false;
+        visited[i][j] = true;
+        if(i == n-1 && j == n-1) return true;
+        return dfs(grid, i-1, j, T, visited) || dfs(grid, i+1, j, T, visited) || dfs(grid, i, j-1, T, visited) || dfs(grid, i, j+1, T, visited);
+    }
+    public int swimInWater(int[][] grid) {
+        this.n = grid.length;
+        int l = grid[0][0], r = n*n - 1;
+        while(l < r) {
+            int m = l + ((r-l) >> 1);
+            if(dfs(grid, 0, 0, m, new boolean[n][n])) {
+                r = m;
+            } else {
+                l = m + 1;
+            }
+        }
+        return l;
+    }
+}
