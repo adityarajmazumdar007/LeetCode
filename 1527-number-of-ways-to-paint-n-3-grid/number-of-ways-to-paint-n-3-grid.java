@@ -2,10 +2,8 @@ class Solution {
 
     private static final int MOD = 1_000_000_007;
 
-    // dp[rowRemaining][previousPattern]
     private int[][] dp;
 
-    // All valid color patterns for one row (3 columns)
     private final String[] patterns = {
         "RYG", "RGY", "RYR", "RGR",
         "YRG", "YGR", "YGY", "YRY",
@@ -30,7 +28,6 @@ class Solution {
             String currPattern = patterns[curr];
             boolean isValid = true;
 
-            // Check column-wise color conflict
             for (int col = 0; col < 3; col++) {
                 if (currPattern.charAt(col) == prevPattern.charAt(col)) {
                     isValid = false;
@@ -57,7 +54,6 @@ class Solution {
 
         int totalWays = 0;
 
-        // Pick each possible pattern as the first row
         for (int i = 0; i < patterns.length; i++) {
             totalWays = (totalWays + countWays(n - 1, i)) % MOD;
         }
