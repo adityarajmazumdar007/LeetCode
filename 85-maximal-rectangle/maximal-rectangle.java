@@ -38,7 +38,7 @@ class Solution {
         for(int i=1;i<rows;i++){
             for(int j=0;j<cols;j++){
                 if(intMatrix[i][j]!=0)intMatrix[i][j]+=intMatrix[i-1][j];
-                else{intMatrix[i][j]=0;}
+                //else{intMatrix[i][j]=0;}
             }
            maxArea = Math.max(maxArea, largestRectangleArea(intMatrix[i]));
         }
